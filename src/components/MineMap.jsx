@@ -8,12 +8,19 @@ const RISK = {
   normal: "#22c55e", moderate: "#eab308", high: "#f97316", critical: "#ef4444",
 };
 
-export default function MineMap({ map }) {
+export default function MineMap({ map, light }) {
   const canvasRef = useRef(null);
   const wrapRef = useRef(null);
   const [zoom, setZoom] = useState(1);
   const [selected, setSelected] = useState(null);
   const [showHistory, setShowHistory] = useState(true);
+
+  // Canvas palette follows the theme (CSS can't reach canvas pixels).
+  const P = light
+    ? { bg: "#ece4d1", grid: "rgba(120,105,80,.28)", free: "rgba(120,110,90,.38)", wall: "rgba(90,80,60,.85)",
+        axis: "#7d7461", path: "#2563eb", rover: "#2563eb", ring: "#1e40af" }
+    : { bg: "#080d18", grid: "rgba(60,75,105,.18)", free: "rgba(148,163,184,.34)", wall: "rgba(100,116,139,.85)",
+        axis: "#8b98b3", path: "#2f81f7", rover: "#2f81f7", ring: "#9ec5ff" };
 
   useEffect(() => {
     const cv = canvasRef.current, wrap = wrapRef.current;
@@ -25,11 +32,11 @@ export default function MineMap({ map }) {
     const ctx = cv.getContext("2d");
     ctx.scale(dpr, dpr);
 
-    ctx.fillStyle = "#080d18";
+    ctx.fillStyle = P.bg;
     ctx.fillRect(0, 0, w, h);
 
     // grid lines
-    ctx.strokeStyle = "rgba(60,75,105,.18)";
+    ctx.strokeStyle = P.grid;
     ctx.lineWidth = 1;
     for (let x = 0; x < w; x += 28) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
     for (let y = 0; y < h; y += 28) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
@@ -46,7 +53,7 @@ export default function MineMap({ map }) {
       for (let gx = 0; gx < W; gx++) {
         const c = map.grid[gy][gx];
         if (c === 0) continue;
-        ctx.fillStyle = c === 1 ? "rgba(148,163,184,.34)" : "rgba(100,116,139,.85)";
+        ctx.fillStyle = c === 1 ? P.free : P.wall;
         ctx.fillRect(ox + gx * cw, oy + gy * cw, cw - 0.4, cw - 0.4);
       }
     }
@@ -60,7 +67,7 @@ export default function MineMap({ map }) {
     // rover path
     const path = map.path ?? [];
     if (path.length > 1) {
-      ctx.strokeStyle = "#2f81f7"; ctx.lineWidth = 2.5; ctx.setLineDash([7, 5]);
+      ctx.strokeStyle = P.path; ctx.lineWidth = 2.5; ctx.setLineDash([7, 5]);
       ctx.beginPath();
       path.forEach((p, i) => (i === 0 ? ctx.moveTo(X(p.x), Y(p.y)) : ctx.lineTo(X(p.x), Y(p.y))));
       ctx.stroke(); ctx.setLineDash([]);
@@ -86,8 +93,8 @@ export default function MineMap({ map }) {
       const gx = (map.rover.x / (map.width * map.resolution)) * W;
       const gy = (map.rover.y / (map.height * map.resolution)) * H;
       const px = X(gx), py = Y(gy);
-      ctx.fillStyle = "#2f81f7";
-      ctx.strokeStyle = "#9ec5ff"; ctx.lineWidth = 2;
+      ctx.fillStyle = P.rover;
+      ctx.strokeStyle = P.ring; ctx.lineWidth = 2;
       ctx.beginPath(); ctx.arc(px, py, 9, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       const a = -((map.rover.yaw ?? 0) * Math.PI) / 180;
       ctx.fillStyle = "#fff";
@@ -98,7 +105,7 @@ export default function MineMap({ map }) {
       ctx.fill();
     }
     // axes labels
-    ctx.fillStyle = "#8b98b3"; ctx.font = "10px sans-serif";
+    ctx.fillStyle = P.axis; ctx.font = "10px sans-serif";
     ["0m", "5m", "10m", "15m", "20m", "25m"].forEach((l, i) => ctx.fillText(l, ox + (i * 5 / (W * map.resolution)) * (cw * W) - 8, h - 6));
     ["0m", "5m", "10m", "15m"].forEach((l, i) => ctx.fillText(l, 4, Y((i * 5) / map.resolution)));
 
@@ -112,7 +119,7 @@ export default function MineMap({ map }) {
       });
       setSelected(hit ?? null);
     };
-  }, [map, zoom, showHistory]);
+  }, [map, zoom, showHistory, light]);
 
   const sel = selected;
 

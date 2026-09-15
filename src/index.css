@@ -139,3 +139,58 @@ body[data-theme="light"] {
   position: relative;
   z-index: 1;
 }
+
+/* ── Light theme: champagne-molded cards ──
+   Dark-mode surfaces stay as-is; everything below only applies when
+   body[data-theme="light"]. Unlayered CSS wins over Tailwind utilities,
+   so no !important is needed. Status hues deepen for readability on cream. */
+body[data-theme="light"] { color: #433c2c; }
+body[data-theme="light"] .card,
+body[data-theme="light"] .neu-surface,
+body[data-theme="light"] .bg-neu-surface {
+  background-color: #f2ecdf;
+  box-shadow: 9px 9px 18px rgba(170,150,110,0.45), -9px -9px 18px rgba(255,255,255,0.9);
+}
+body[data-theme="light"] .neu-hoverable:hover {
+  box-shadow: 12px 12px 24px rgba(170,150,110,0.5), -12px -12px 24px rgba(255,255,255,0.95);
+}
+body[data-theme="light"] .neu-pressed,
+body[data-theme="light"] .neu-well {
+  background-color: #e9e0cd;
+  box-shadow: inset 6px 6px 12px rgba(170,150,110,0.45), inset -6px -6px 12px rgba(255,255,255,0.85);
+}
+body[data-theme="light"] .neu-well {
+  box-shadow: inset 10px 10px 22px rgba(170,150,110,0.5), inset -10px -10px 22px rgba(255,255,255,0.9);
+}
+body[data-theme="light"] .neu-track,
+body[data-theme="light"] .shadow-neu-track {
+  background-color: #e9e0cd;
+  box-shadow: inset 3px 3px 6px rgba(170,150,110,0.45), inset -3px -3px 6px rgba(255,255,255,0.85);
+}
+body[data-theme="light"] .neu-btn,
+body[data-theme="light"] .shadow-neu-small {
+  background-color: #f2ecdf;
+  box-shadow: 5px 5px 10px rgba(170,150,110,0.45), -5px -5px 10px rgba(255,255,255,0.9);
+}
+body[data-theme="light"] .neu-btn:hover {
+  box-shadow: 12px 12px 24px rgba(170,150,110,0.5), -12px -12px 24px rgba(255,255,255,0.95);
+}
+body[data-theme="light"] .neu-btn:active {
+  box-shadow: inset 3px 3px 6px rgba(170,150,110,0.45), inset -3px -3px 6px rgba(255,255,255,0.85);
+}
+body[data-theme="light"] .shadow-neu-hover {
+  box-shadow: 12px 12px 24px rgba(170,150,110,0.5), -12px -12px 24px rgba(255,255,255,0.95);
+}
+body[data-theme="light"] .bg-neu-bg { background-color: transparent; }
+body[data-theme="light"] .text-white { color: #3f3a2c; }
+body[data-theme="light"] .text-slate-200 { color: #4c4636; }
+body[data-theme="light"] .text-slate-300 { color: #5c5543; }
+body[data-theme="light"] .text-dim { color: #7d7461; }
+body[data-theme="light"] .text-green-400 { color: #15803d; }
+body[data-theme="light"] .text-yellow-400 { color: #a16207; }
+body[data-theme="light"] .text-red-400 { color: #b91c1c; }
+body[data-theme="light"] .text-orange-400 { color: #c2410c; }
+body[data-theme="light"] .text-purple-400 { color: #7c3aed; }
+body[data-theme="light"] .text-blue-400 { color: #1d4ed8; }
+body[data-theme="light"] .bg-slate-700 { background-color: #d8cfb8; }
+body[data-theme="light"] .scroll-thin::-webkit-scrollbar-thumb { background: #c9bc9e; }

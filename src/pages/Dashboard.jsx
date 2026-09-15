@@ -48,7 +48,7 @@ export default function Dashboard() {
         {/* CENTER — map + history + mission/env */}
         <div className="col-span-12 md:col-span-8 xl:col-span-6 flex flex-col gap-2.5 min-h-0">
           <div className="flex-[1.4] min-h-[320px] flex flex-col [&>section]:flex-1">
-            <MineMap map={map} />
+            <MineMap map={map} light={isLight} />
           </div>
           <div className="flex-1 min-h-[170px] flex flex-col [&>section]:flex-1">
             <GasHistory history={history} />
