@@ -90,3 +90,52 @@ h1, h2 { font-family: "Plus Jakarta Sans", "DM Sans", Inter, system-ui, sans-ser
 .alert-blink { animation: blink-alert 1.2s ease-in-out infinite; }
 
 .recharts-wrapper :focus { outline: none; }
+
+/* ── Aura Gradient: "Champagne Glass" ──
+   Base color lives on BODY (light theme only) — the transparent .aura-bg
+   container lets multiply layers composite against it. */
+body[data-theme="light"] {
+  background-color: #faf8f2;
+  color-scheme: light;
+}
+.aura-bg {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh; /* explicit — absolute layers contribute no height */
+  /* NO background-color here */
+}
+.aura-layer-1, .aura-layer-2, .aura-layer-3, .aura-layer-4 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+}
+.aura-layer-1 {
+  background: linear-gradient(135deg, rgba(255,251,235,0.95) 0%, rgba(254,243,199,0.62) 50%, rgba(253,230,138,0.34) 100%);
+  mix-blend-mode: normal;
+}
+.aura-layer-2 {
+  background: radial-gradient(ellipse 50% 45% at 32% 42%, rgba(251,191,36,0.26) 0%, transparent 68%);
+  mix-blend-mode: multiply;
+  filter: blur(125px);
+}
+.aura-layer-3 {
+  background: radial-gradient(ellipse 42% 50% at 72% 60%, rgba(245,158,11,0.20) 0%, transparent 70%);
+  mix-blend-mode: multiply;
+  filter: blur(138px);
+}
+.aura-layer-4 {
+  background: linear-gradient(120deg, rgba(255,255,255,0.65), transparent 42%, rgba(255,255,255,0.30) 72%);
+  mix-blend-mode: multiply;
+  filter: blur(45px);
+}
+@media (min-width: 768px) {
+  .aura-layer-2 { filter: blur(180px); }
+  .aura-layer-3 { filter: blur(198px); }
+  .aura-layer-4 { filter: blur(65px); }
+}
+.aura-content {
+  position: relative;
+  z-index: 1;
+}

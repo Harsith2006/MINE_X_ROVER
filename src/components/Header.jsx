@@ -1,4 +1,4 @@
-import { Flame, TriangleAlert, Battery, Signal, Clock } from "lucide-react";
+import { Flame, TriangleAlert, Battery, Signal, Clock, Sun, Moon } from "lucide-react";
 
 function fmtDuration(fromIso) {
   if (!fromIso) return "--:--:--";
@@ -10,7 +10,7 @@ function fmtDuration(fromIso) {
 }
 const fmtTime = (iso) => (iso ? new Date(iso).toLocaleTimeString("en-US", { hour12: true }) : "--");
 
-export default function Header({ rover }) {
+export default function Header({ rover, theme, onToggleTheme }) {
   const r = rover ?? {};
   const online = r.online !== false;
   const batt = r.battery ?? 0;
@@ -58,6 +58,15 @@ export default function Header({ rover }) {
           </div>
         </div>
       </div>
+
+      <button
+        onClick={onToggleTheme}
+        title={theme === "light" ? "Switch to dark control-room" : "Switch to light aura theme"}
+        aria-label="Toggle light/dark theme"
+        className="neu-btn neu-focusable w-11 h-11 !min-h-0 !rounded-full flex items-center justify-center text-slate-200 shrink-0"
+      >
+        {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+      </button>
 
       <button className="neu-btn neu-focusable flex items-center gap-2 text-[12px] font-bold px-5 text-white shrink-0 !bg-red-500/90 !shadow-[5px_5px_10px_rgba(0,0,0,0.55),-5px_-5px_10px_rgba(248,113,113,0.25)]">
         <TriangleAlert size={15} /> EMERGENCY STOP

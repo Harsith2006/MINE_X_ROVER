@@ -1,4 +1,6 @@
 import useDashboardData from "../hooks/useDashboardData";
+import useTheme from "../hooks/useTheme";
+import AuraBackground from "../components/AuraBackground";
 import Header from "../components/Header";
 import LiveVideo from "../components/LiveVideo";
 import MineMap from "../components/MineMap";
@@ -17,6 +19,7 @@ import EnvironmentalConditions from "../components/EnvironmentalConditions";
 export default function Dashboard() {
   const { rover, gases, prediction, map, history, telemetry, health, alerts, mission, env, video, loading } =
     useDashboardData();
+  const { theme, toggle, isLight } = useTheme();
 
   if (loading) {
     return (
@@ -28,8 +31,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="h-screen flex flex-col gap-3 p-3 bg-neu-bg text-ink font-body overflow-hidden">
-      <Header rover={rover} />
+    <AuraBackground active={isLight}>
+    <div className={`h-screen flex flex-col gap-3 p-3 font-body overflow-hidden ${isLight ? "" : "bg-neu-bg text-ink"}`}>
+      <Header rover={rover} theme={theme} onToggleTheme={toggle} />
 
       <main className="flex-1 min-h-0 grid grid-cols-12 gap-3 overflow-y-auto xl:overflow-hidden scroll-thin">
         {/* LEFT — video + telemetry + health */}
@@ -74,5 +78,6 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
+    </AuraBackground>
   );
 }
