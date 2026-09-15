@@ -20,7 +20,7 @@ export default function MineMap({ map }) {
     if (!cv || !wrap || !map?.grid) return;
     const W = map.width, H = map.height;
     const dpr = window.devicePixelRatio || 1;
-    const w = wrap.clientWidth, h = wrap.clientHeight;
+    const w = cv.clientWidth || wrap.clientWidth, h = cv.clientHeight || wrap.clientHeight;
     cv.width = w * dpr; cv.height = h * dpr;
     const ctx = cv.getContext("2d");
     ctx.scale(dpr, dpr);
@@ -117,7 +117,7 @@ export default function MineMap({ map }) {
   const sel = selected;
 
   return (
-    <section className="card p-3 flex flex-col min-h-0">
+    <section className="card p-4 flex flex-col min-h-0">
       <div className="flex items-center gap-3 flex-wrap mb-1.5">
         <h2 className="card-title !text-slate-200">2D Mine Map <span className="normal-case font-normal">(Updated Every 1 Minute)</span></h2>
         <div className="flex items-center gap-3 text-[10px] text-dim">
@@ -127,23 +127,23 @@ export default function MineMap({ map }) {
           <span><i className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1" />Safe Zone</span>
           <span><i className="inline-block w-2 h-2 rounded-full bg-slate-700 mr-1" />Unknown</span>
         </div>
-        <button onClick={() => setShowHistory(!showHistory)} className="ml-auto flex items-center gap-1.5 text-[11px] bg-panel2 hover:bg-edge border border-edge rounded-lg px-2.5 py-1">
+        <button onClick={() => setShowHistory(!showHistory)} className="neu-focusable ml-auto flex items-center gap-1.5 text-[11px] text-slate-200 rounded-neu-btn shadow-neu-small bg-neu-surface px-3 py-1.5 active:shadow-neu-track">
           <History size={12} /> {showHistory ? "Hide History" : "View History"}
         </button>
       </div>
 
       <div className="relative flex-1 min-h-[280px]">
-        <div ref={wrapRef} className="absolute inset-0">
-          <canvas ref={canvasRef} className="w-full h-full rounded-lg cursor-crosshair" />
+        <div ref={wrapRef} className="absolute inset-0 neu-well overflow-hidden !rounded-[20px] p-1.5">
+          <canvas ref={canvasRef} className="w-full h-full rounded-2xl cursor-crosshair" />
         </div>
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-1">
-          <button onClick={() => setZoom((z) => Math.min(2.5, +(z + 0.25).toFixed(2)))} className="w-7 h-7 bg-panel2/90 border border-edge rounded-md flex items-center justify-center hover:bg-edge"><Plus size={14} /></button>
-          <button onClick={() => setZoom((z) => Math.max(0.6, +(z - 0.25).toFixed(2)))} className="w-7 h-7 bg-panel2/90 border border-edge rounded-md flex items-center justify-center hover:bg-edge"><Minus size={14} /></button>
-          <button onClick={() => setZoom(1)} className="w-7 h-7 bg-panel2/90 border border-edge rounded-md flex items-center justify-center hover:bg-edge"><Crosshair size={14} /></button>
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-1.5">
+          <button onClick={() => setZoom((z) => Math.min(2.5, +(z + 0.25).toFixed(2)))} className="neu-focusable w-9 h-9 rounded-full bg-neu-surface shadow-neu-small flex items-center justify-center text-slate-200 active:shadow-neu-track"><Plus size={15} /></button>
+          <button onClick={() => setZoom((z) => Math.max(0.6, +(z - 0.25).toFixed(2)))} className="neu-focusable w-9 h-9 rounded-full bg-neu-surface shadow-neu-small flex items-center justify-center text-slate-200 active:shadow-neu-track"><Minus size={15} /></button>
+          <button onClick={() => setZoom(1)} className="neu-focusable w-9 h-9 rounded-full bg-neu-surface shadow-neu-small flex items-center justify-center text-slate-200 active:shadow-neu-track"><Crosshair size={15} /></button>
         </div>
         <div className="absolute bottom-2 right-12 text-[10px] text-dim font-mono">zoom {zoom.toFixed(2)}x · click a gas marker for details</div>
         {sel && (
-          <div className="absolute left-2 bottom-2 bg-[#0b1322]/95 border border-edge rounded-lg p-2.5 text-[11px] w-60">
+          <div className="absolute left-4 bottom-4 bg-neu-surface rounded-2xl shadow-neu-hover p-3 text-[11px] w-60">
             <p className="font-bold text-white mb-1">Gas Event · <span style={{ color: RISK[sel.riskLevel] }}>{sel.riskLevel?.toUpperCase()}</span></p>
             <p className="text-dim">x: {sel.x} m · y: {sel.y} m</p>
             <p className="text-dim">{sel.gasType} · meas <b className="text-slate-200">{sel.measuredValue}</b> · pred <b className="text-slate-200">{sel.predictedValue}</b></p>

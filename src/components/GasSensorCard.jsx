@@ -20,7 +20,7 @@ export default function GasSensorCard({ sensor }) {
   const trendDir = last == null || first == null ? "→" : last > first ? "↗" : last < first ? "↘" : "→";
 
   return (
-    <div className="bg-panel2 border border-edge rounded-lg p-2.5">
+    <div className="rounded-neu-btn bg-neu-surface shadow-neu-small neu-hoverable p-3">
       <div className="flex items-center justify-between">
         <p className="text-[11px] text-slate-300 font-medium">{sensor.model} <span className="text-dim">({sensor.name})</span></p>
         <span className={`w-2 h-2 rounded-full ${st.dot}`} />
@@ -30,7 +30,7 @@ export default function GasSensorCard({ sensor }) {
           <p className="text-[19px] font-bold text-white leading-none">{sensor.value} <span className="text-[11px] font-medium text-dim">{sensor.unit}</span></p>
           <p className="text-[10px] text-dim mt-1">Status <span className={`font-semibold ${st.text}`}>{st.label} {trendDir}</span></p>
         </div>
-        <div className="w-[55%] h-[46px]">
+        <div className="w-[55%] h-[52px] neu-track px-2 py-1">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
               <Line type="monotone" dataKey="v" stroke={st.chart} strokeWidth={1.5} dot={false} isAnimationActive={false} />

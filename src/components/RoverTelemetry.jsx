@@ -16,13 +16,15 @@ export default function RoverTelemetry({ telemetry }) {
     [Cog, "Motor Status", t.motor, good(t.motor)],
   ] : [];
   return (
-    <section className="card p-3">
+    <section className="card p-4">
       <h2 className="card-title !text-slate-200 mb-2">Rover Telemetry</h2>
       {!t ? <p className="text-[11px] text-dim">Loading…</p> : (
-        <ul className="divide-y divide-edge/60">
+        <ul className="space-y-1">
           {rows.map(([Icon, k, v, c]) => (
-            <li key={k} className="flex items-center gap-2 py-[5px] text-[12px]">
-              <Icon size={13} className="text-dim shrink-0" />
+            <li key={k} className="flex items-center gap-2.5 px-2 py-[6px] text-[12px] neu-pressed !rounded-xl">
+              <span className="neu-track w-7 h-7 rounded-full flex items-center justify-center shrink-0">
+                <Icon size={13} className="text-slate-300" />
+              </span>
               <span className="text-slate-300">{k}</span>
               <span className={`ml-auto font-semibold ${c ?? "text-white font-mono"}`}>{v}</span>
             </li>

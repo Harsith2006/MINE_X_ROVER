@@ -21,17 +21,17 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="h-screen flex flex-col items-center justify-center gap-3 bg-[#070c16]">
-        <div className="w-10 h-10 rounded-full border-2 border-edge border-t-blue-500 animate-spin" />
+        <div className="neu-track w-12 h-12 rounded-full border-2 border-transparent border-t-[#8b84ff] animate-spin" />
         <p className="text-[12px] text-dim tracking-widest uppercase">Initialising control room…</p>
       </div>
     );
   }
 
   return (
-    <div className="h-screen flex flex-col gap-2.5 p-2.5 bg-[#070c16] text-ink overflow-hidden">
+    <div className="h-screen flex flex-col gap-3 p-3 bg-neu-bg text-ink font-body overflow-hidden">
       <Header rover={rover} />
 
-      <main className="flex-1 min-h-0 grid grid-cols-12 gap-2.5 overflow-y-auto xl:overflow-hidden scroll-thin">
+      <main className="flex-1 min-h-0 grid grid-cols-12 gap-3 overflow-y-auto xl:overflow-hidden scroll-thin">
         {/* LEFT — video + telemetry + health */}
         <div className="col-span-12 md:col-span-4 xl:col-span-3 flex flex-col gap-2.5 min-h-0">
           <LiveVideo info={video} />
@@ -57,8 +57,8 @@ export default function Dashboard() {
 
         {/* RIGHT — gas cards + prediction + alerts */}
         <div className="col-span-12 xl:col-span-3 flex flex-col gap-2.5 min-h-0 overflow-y-auto scroll-thin">
-          <section className="card p-3">
-            <div className="flex items-center gap-2 mb-2">
+          <section className="card p-4">
+            <div className="flex items-center gap-2 mb-2.5">
               <span className="live-dot" />
               <h2 className="card-title !text-slate-200">Gas Sensor Readings</h2>
               <span className="text-[10px] text-dim">(Live)</span>

@@ -14,15 +14,17 @@ export default function GasPrediction({ prediction }) {
   let acc = 0;
 
   return (
-    <section className="card p-3">
-      <div className="flex items-center gap-2 mb-2">
-        <BrainCircuit size={14} className="text-purple-400" />
+    <section className="card p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="neu-track w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+          <BrainCircuit size={15} className="text-purple-400" />
+        </span>
         <h2 className="card-title !text-slate-200">Gas Level Prediction</h2>
         <span className="text-[10px] text-dim">(Random Forest)</span>
       </div>
       {!p ? <p className="text-[11px] text-dim">Waiting for model output…</p> : (
         <div className="flex gap-3">
-          <div className="flex flex-col items-center shrink-0">
+          <div className="flex flex-col items-center shrink-0 neu-well px-3 pt-2 pb-2.5">
             <svg width="132" height="84" viewBox="0 0 132 84">
               {segs.map((s, i) => {
                 const dash = `${s.frac * (C / 2)} ${C}`;
@@ -48,7 +50,7 @@ export default function GasPrediction({ prediction }) {
               ["Trend (" + p.horizon + ")", p.trend, "text-red-400"],
               ["Risk Level", st.label, st.text],
             ].map(([k, v, c]) => (
-              <div key={k} className="flex justify-between border-b border-edge/60 pb-1">
+              <div key={k} className="flex justify-between items-center neu-track px-3 py-1.5">
                 <span className="text-dim">{k}</span><span className={`font-semibold ${c} flex items-center gap-1`}>{v}{k.startsWith("Trend") && <TrendingUp size={11} />}</span>
               </div>
             ))}

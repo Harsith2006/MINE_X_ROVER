@@ -18,10 +18,10 @@ export default function Header({ rover }) {
   const bars = [1, 2, 3, 4, 5].map((i) => ((r.signal ?? 0) / 20 >= i ? "bg-green-400" : "bg-slate-700"));
 
   return (
-    <header className="card flex items-center gap-4 px-4 py-2.5 shrink-0">
-      <div className="flex items-center gap-2.5 min-w-0">
-        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center shrink-0">
-          <Flame size={20} className="text-white" />
+    <header className="card flex items-center gap-4 px-5 py-3 shrink-0 neu-hoverable">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="neu-well w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">
+          <Flame size={22} className="text-orange-400" />
         </div>
         <div className="min-w-0">
           <h1 className="text-[15px] font-bold text-white leading-tight truncate">Mine Rescue Rover Dashboard</h1>
@@ -59,7 +59,7 @@ export default function Header({ rover }) {
         </div>
       </div>
 
-      <button className={`flex items-center gap-2 text-[12px] font-bold px-4 py-2 rounded-lg text-white shrink-0 ${r.emergency ? "bg-red-500 alert-blink" : "bg-red-600/90 hover:bg-red-600"}`}>
+      <button className="neu-btn neu-focusable flex items-center gap-2 text-[12px] font-bold px-5 text-white shrink-0 !bg-red-500/90 !shadow-[5px_5px_10px_rgba(0,0,0,0.55),-5px_-5px_10px_rgba(248,113,113,0.25)]">
         <TriangleAlert size={15} /> EMERGENCY STOP
       </button>
     </header>

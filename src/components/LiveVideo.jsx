@@ -14,14 +14,15 @@ export default function LiveVideo({ info }) {
   const fullscreen = () => boxRef.current?.requestFullscreen?.().catch(() => {});
 
   return (
-    <section className="card p-3 flex flex-col">
-      <div className="flex items-center gap-2 mb-2">
+    <section className="card p-4 flex flex-col">
+      <div className="flex items-center gap-2 mb-2.5">
         <span className="live-dot" />
         <h2 className="card-title !text-slate-200">Live Video Feed</h2>
         <span className="ml-auto text-[10px] text-dim font-mono">{connected ? "● CONNECTED" : "○ NO SIGNAL"} · {ts}</span>
       </div>
 
-      <div ref={boxRef} className="relative rounded-lg overflow-hidden bg-black border border-edge aspect-[16/10]">
+      <div ref={boxRef} className="relative rounded-2xl overflow-hidden bg-black aspect-[16/10]"
+        style={{ boxShadow: "inset 10px 10px 22px rgba(0,0,0,0.75), inset -10px -10px 22px rgba(148,178,255,0.08)" }}>
         {/* placeholder tunnel scene (pure CSS/SVG so no assets needed) */}
         <div className="absolute inset-0" style={{ transform: `scale(${zoom})`, transition: "transform .25s" }}>
           <svg viewBox="0 0 400 250" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
@@ -45,13 +46,13 @@ export default function LiveVideo({ info }) {
         <span className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-white/60" />
       </div>
 
-      <div className="grid grid-cols-4 gap-2 mt-2">
-        <button className="flex items-center justify-center gap-1.5 text-[11px] bg-panel2 hover:bg-edge border border-edge rounded-lg py-1.5"><Camera size={13} /> Snapshot</button>
-        <button onClick={() => setRec(!rec)} className={`flex items-center justify-center gap-1.5 text-[11px] border rounded-lg py-1.5 ${rec ? "bg-red-600/20 border-red-500 text-red-300" : "bg-panel2 hover:bg-edge border-edge"}`}>
+      <div className="grid grid-cols-4 gap-2.5 mt-3">
+        <button className="neu-btn neu-focusable flex items-center justify-center gap-1.5 text-[11px] text-slate-200"><Camera size={13} /> Snapshot</button>
+        <button onClick={() => setRec(!rec)} className={`neu-btn neu-focusable flex items-center justify-center gap-1.5 text-[11px] ${rec ? "!bg-red-500/15 text-red-300" : "text-slate-200"}`}>
           {rec ? <CircleDot size={13} /> : <Video size={13} />} {rec ? "Stop" : "Record"}
         </button>
-        <button onClick={() => setZoom((z) => (z >= 2 ? 1 : +(z + 0.25).toFixed(2)))} className="flex items-center justify-center gap-1.5 text-[11px] bg-panel2 hover:bg-edge border border-edge rounded-lg py-1.5"><ZoomIn size={13} /> Zoom {zoom > 1 ? `${zoom}x` : ""}</button>
-        <button onClick={fullscreen} className="flex items-center justify-center gap-1.5 text-[11px] bg-panel2 hover:bg-edge border border-edge rounded-lg py-1.5"><Maximize size={13} /> Full Screen</button>
+        <button onClick={() => setZoom((z) => (z >= 2 ? 1 : +(z + 0.25).toFixed(2)))} className="neu-btn neu-focusable flex items-center justify-center gap-1.5 text-[11px] text-slate-200"><ZoomIn size={13} /> Zoom {zoom > 1 ? `${zoom}x` : ""}</button>
+        <button onClick={fullscreen} className="neu-btn neu-focusable flex items-center justify-center gap-1.5 text-[11px] text-slate-200"><Maximize size={13} /> Full Screen</button>
       </div>
     </section>
   );
