@@ -1,28 +1,34 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Dependencies
+node_modules/
+**/node_modules/
 
-node_modules
-dist
-dist-ssr
-*.local
+# Production builds
+dist/
+**/dist/
 
-# Rover backend runtime (frames in RAM, uploads on disk)
-uploads/
+# Python
 __pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+.venv/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Environment variables
+.env
+.env.local
+**/.env
+**/.env.local
+
+# OS / Editor files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+.vscode/
+.idea/
+
+# Backend uploaded test images (preserve directory with .gitkeep)
+backend/uploads/images/*
+!backend/uploads/images/.gitkeep
+backend/uploads/maps/*
+!backend/uploads/maps/.gitkeep
