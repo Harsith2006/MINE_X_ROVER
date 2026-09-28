@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Rover backend runtime (frames in RAM, uploads on disk)
+uploads/
+__pycache__/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

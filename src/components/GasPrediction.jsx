@@ -54,6 +54,12 @@ export default function GasPrediction({ prediction }) {
                 <span className="text-dim">{k}</span><span className={`font-semibold ${c} flex items-center gap-1`}>{v}{k.startsWith("Trend") && <TrendingUp size={11} />}</span>
               </div>
             ))}
+            {p.reason && (
+              <div className="neu-track px-3 py-1.5 text-[10px] text-slate-300">
+                <span className="text-dim block mb-0.5">Model Diagnosis:</span>
+                <span className="font-mono text-yellow-300">{p.reason}</span>
+              </div>
+            )}
           </div>
         </div>
       )}
