@@ -161,7 +161,7 @@ export const missionInfo = {
   roverId: "RVR-01",
   startTime: iso(-2 * 3600e3 - 47 * 60e3),
   targetArea: "Sector 7 – East Tunnel",
-  team: "Team Alpha",
+  team: "SOBERSQUAD_26",
   status: "In Progress",
 };
 
